@@ -28,7 +28,8 @@ Obj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
-**/v15/**
+**/.vs
+**/.vs/**
 /wwwroot/dist/
 /ClientApp/dist/
 
