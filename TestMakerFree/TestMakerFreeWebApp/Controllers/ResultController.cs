@@ -9,14 +9,14 @@ using Newtonsoft.Json;
 namespace TestMakerFreeWebApp.Controllers
 {
     [Route("api/[controller]")]
-    public class QuestionController : Controller
+    public class ResultController : Controller
     {
         #region RESTful conventions methods
         /// <summary>
-        /// Retrieves the question with the given {id}
+        /// Retrieves the result with the given {id}
         /// </summary>
-        /// <param name="id">The {id} of the question to retrieve</param>
-        /// <returns>The Question with the given {id}</returns>
+        /// <param name="id">The {id} of the result to retrieve</param>
+        /// <returns>The Result with the given {id}</returns>
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -24,29 +24,29 @@ namespace TestMakerFreeWebApp.Controllers
         }
 
         /// <summary>
-        /// Add a new question to the database.
+        /// Add a new result to the database.
         /// </summary>
         /// <param name="m">The view model containing the data to insert</param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult Put(QuestionViewModel m)
+        public IActionResult Put(ResultViewModel m)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Edit the question with the given {id}
+        /// Edit the answer with the given {id}
         /// </summary>
         /// <param name="m">The view model containing the data to update</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Post(QuestionViewModel m)
+        public IActionResult Post(ResultViewModel m)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Deletes the question with the given id from the database
+        /// Deletes the answer with the given id from the database
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -58,30 +58,30 @@ namespace TestMakerFreeWebApp.Controllers
 
         #endregion
 
-        // GET api/question/all
+        // GET api/result/all
         [HttpGet("All/{quizId}")]
-       public IActionResult All(int quizId)
+        public IActionResult All(int quizId)
         {
-            var sampleQuestions = new List<QuestionViewModel>();
+            var sampleResults = new List<ResultViewModel>();
 
-            // add a first sample question
-            sampleQuestions.Add(new QuestionViewModel()
+            // add a first sample result
+            sampleResults.Add(new ResultViewModel()
             {
                 Id = 1,
                 QuizId = quizId,
-                Text = "What do you value most in your life?",
+                Text = "Sample Result",
                 CreateDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now
             });
 
-            // add a bunch of other sample questions
+            // add a bunch of other sample results
             for (int i = 2; i <= 5; i++)
             {
-                sampleQuestions.Add(new QuestionViewModel()
+                sampleResults.Add(new ResultViewModel()
                 {
                     Id = i,
                     QuizId = quizId,
-                    Text = String.Format("Sample Question {0}", i),
+                    Text = String.Format("Sample Result {0}", i),
                     CreateDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now
                 });
@@ -89,7 +89,7 @@ namespace TestMakerFreeWebApp.Controllers
 
             // output the result in JSON format
             return new JsonResult(
-                sampleQuestions,
+                sampleResults,
                 new JsonSerializerSettings()
                 {
                     Formatting = Formatting.Indented
