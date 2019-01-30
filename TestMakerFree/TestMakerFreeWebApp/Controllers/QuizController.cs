@@ -83,7 +83,7 @@ namespace TestMakerFreeWebApp.Controllers
         /// </summary>
         /// <param name="num">The number of quizzes to retrieve</param>
         /// <returns>The {num} latest quizzes</returns>
-        [HttpGet("Latest/{num}")]
+        [HttpGet("Latest/{num?}")]
         public IActionResult Latest(int num = 10)
         {
             var sampleQuizzes = new List<QuizViewModel>();
