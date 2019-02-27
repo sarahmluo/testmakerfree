@@ -31,7 +31,7 @@ namespace TestMakerFreeWebApp.ViewModels
         public int Value { get; set; }
         [JsonIgnore]
         public int ViewCount { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public DateTime LastModifiedDate { get; set; }
         #endregion
     }

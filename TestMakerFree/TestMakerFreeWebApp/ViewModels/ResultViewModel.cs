@@ -28,7 +28,7 @@ namespace TestMakerFreeWebApp.ViewModels
         public int Flags { get; set; }
         [JsonIgnore]
         public int ViewCount { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public DateTime LastModifiedDate { get; set; }
         #endregion
     }
