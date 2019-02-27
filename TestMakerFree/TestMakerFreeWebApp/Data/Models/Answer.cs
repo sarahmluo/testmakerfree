@@ -44,5 +44,13 @@ namespace TestMakerFreeWebApp.Data.Models
         public DateTime LastModifiedDate { get; set; }
 
         #endregion
+
+        #region Lazy-Loaded Properties
+        /// <summary>
+        /// The parent question.
+        /// </summary>
+        [ForeignKey("QuestionId")]
+        public virtual Question Question { get; set; }
+        #endregion
     }
 }

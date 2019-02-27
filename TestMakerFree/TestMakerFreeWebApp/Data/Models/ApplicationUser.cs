@@ -25,6 +25,9 @@ namespace TestMakerFreeWebApp.Data.Models
         public string UserName { get; set; }
 
         [Required]
+        public int Role { get; set; }
+
+        [Required]
         public string Email { get; set; }
 
         public string DisplayName { get; set; }
@@ -42,6 +45,13 @@ namespace TestMakerFreeWebApp.Data.Models
 
         [Required]
         public DateTime LastModifiedDate { get; set; }
+        #endregion
+
+        #region Lazy-Loaded Properties
+        /// <summary>
+        /// A list of all quizzes created by this user.
+        /// </summary>
+        public virtual List<Quiz> Quizzes { get; set; }
         #endregion
     }
 }

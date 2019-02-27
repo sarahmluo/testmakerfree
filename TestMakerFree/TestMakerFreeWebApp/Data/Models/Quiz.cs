@@ -46,7 +46,28 @@ namespace TestMakerFreeWebApp.Data.Models
 
         [Required]
         public DateTime LastModifiedDate { get; set; }
-               
+
+        #endregion
+
+        #region Lazy-Loaded Properties
+        /// <summary>
+        /// The quiz author: it will be loaded on first use
+        /// thanks to the EF Lazy-Loading Feature.
+        /// </summary>
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser User { get; set; }
+
+        /// <summary>
+        /// A list containing all questions related to this quiz.
+        /// It will be populated on first use thanks to EF lazy-loading feature.
+        /// </summary>
+        public virtual List<Question> Questions { get; set; }
+
+        /// <summary>
+        /// A list containing all the results related to this quiz.
+        /// It will be populated on first use thanks to EF lazy-loading feature.
+        /// </summary>
+        public virtual List<Result> Results { get; set; }
         #endregion
     }
 }
