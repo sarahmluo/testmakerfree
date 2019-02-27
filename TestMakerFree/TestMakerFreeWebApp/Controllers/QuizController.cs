@@ -28,7 +28,7 @@ namespace TestMakerFreeWebApp.Controllers
                 Id = id,
                 Title = String.Format("Sample quiz with id {0}", id),
                 Description = "Not a real quiz, it's just a sample",
-                CreateDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now
             };
 
@@ -94,7 +94,7 @@ namespace TestMakerFreeWebApp.Controllers
                 Id = 1,
                 Title = "Which Office character are You?",
                 Description = "Sitcom-related presonality test",
-                CreateDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now
             });
 
@@ -106,7 +106,7 @@ namespace TestMakerFreeWebApp.Controllers
                     Id = i,
                     Title = String.Format("Sample Quiz {0}", i),
                     Description = "This is a sample quiz",
-                    CreateDate = DateTime.Now,
+                    CreatedDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now
                 });
             }

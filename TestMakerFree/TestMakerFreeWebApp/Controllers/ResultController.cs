@@ -70,7 +70,7 @@ namespace TestMakerFreeWebApp.Controllers
                 Id = 1,
                 QuizId = quizId,
                 Text = "Sample Result",
-                CreateDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now
             });
 
@@ -82,7 +82,7 @@ namespace TestMakerFreeWebApp.Controllers
                     Id = i,
                     QuizId = quizId,
                     Text = String.Format("Sample Result {0}", i),
-                    CreateDate = DateTime.Now,
+                    CreatedDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now
                 });
             }

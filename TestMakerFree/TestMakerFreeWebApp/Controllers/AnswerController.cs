@@ -72,7 +72,7 @@ namespace TestMakerFreeWebApp.Controllers
                 Id = 1,
                 QuestionId = questionId,
                 Text = "Friends and family",
-                CreateDate = DateTime.Now,
+                CreatedDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now
             });
 
@@ -84,7 +84,7 @@ namespace TestMakerFreeWebApp.Controllers
                     Id = i,
                     QuestionId = questionId,
                     Text = String.Format("Sample Answer {0}", i),
-                    CreateDate = DateTime.Now,
+                    CreatedDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now
                 });
             }
