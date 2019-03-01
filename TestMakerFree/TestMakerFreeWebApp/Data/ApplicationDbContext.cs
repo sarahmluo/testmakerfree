@@ -14,6 +14,13 @@ namespace TestMakerFreeWebApp.Data
         }
         #endregion
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TestMakerFree;Integrated Security=True;MultipleActiveResultSets=true");
+
+        }
+
         #region Methods
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
