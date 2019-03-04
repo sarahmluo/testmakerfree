@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static TestMakerFreeWebApp.Enums.Enums;
 
 namespace TestMakerFreeWebApp.Data.Models
 {
@@ -25,7 +26,7 @@ namespace TestMakerFreeWebApp.Data.Models
         public string UserName { get; set; }
 
         [Required]
-        public int Role { get; set; }
+        public RoleType Role { get; set; }
 
         [Required]
         public string Email { get; set; }

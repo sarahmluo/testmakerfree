@@ -32,7 +32,7 @@ namespace TestMakerFreeWebApp.Data
             var user_Admin = new ApplicationUser()
             {
                 Id = Guid.NewGuid().ToString(),
-                Role = 1, // 1 = Admin
+                Role = RoleType.Admin,
                 UserName = "Admin",
                 Email = "admin@testmakefree.com",
                 CreatedDate = createdDate,
@@ -48,7 +48,7 @@ namespace TestMakerFreeWebApp.Data
             var user_Ryan = new ApplicationUser()
             {
                 Id = Guid.NewGuid().ToString(),
-                Role = 2, // 2 = User
+                Role = RoleType.User,
                 UserName = "Ryan",
                 Email = "ryan@testmakefree.com",
                 CreatedDate = createdDate,
@@ -58,7 +58,7 @@ namespace TestMakerFreeWebApp.Data
             var user_Imogen = new ApplicationUser()
             {
                 Id = Guid.NewGuid().ToString(),
-                Role = 2, // 2 = User
+                Role = RoleType.User,
                 UserName = "Imogen",
                 Email = "Imogen@testmakefree.com",
                 CreatedDate = createdDate,
@@ -68,7 +68,7 @@ namespace TestMakerFreeWebApp.Data
             var user_Spock = new ApplicationUser()
             {
                 Id = Guid.NewGuid().ToString(),
-                Role = 2, // 2 = User
+                Role = RoleType.User,
                 UserName = "Spock",
                 Email = "Spock@testmakefree.com",
                 CreatedDate = createdDate,
