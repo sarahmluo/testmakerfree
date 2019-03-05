@@ -11,7 +11,7 @@ namespace TestMakerFreeWebApp.Data
     public class DbSeeder
     {
         #region Public Methods
-        public static void seed(ApplicationDbContext dbContext) {
+        public static void Seed(ApplicationDbContext dbContext) {
             // Create default Users if there are none
             if (!dbContext.Users.Any()) CreateUsers(dbContext);
 
@@ -139,10 +139,11 @@ namespace TestMakerFreeWebApp.Data
                 CreatedDate = createdDate,
                 LastModifiedDate = lastModifiedDate
             });
+
+            dbContext.SaveChanges();
         }
-
+      
         #endregion
-
 
         #region Utility Methods
 

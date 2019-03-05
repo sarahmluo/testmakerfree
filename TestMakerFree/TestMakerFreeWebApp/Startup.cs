@@ -75,6 +75,17 @@ namespace TestMakerFreeWebApp
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            // Create a service scope to get an ApplicationDbCOntext instance using DI
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+
+                // Create the db if it doesn't exist and apply any pending migrations.
+                dbContext.Database.Migrate();
+                // Seed the db.
+                DbSeeder.Seed(dbContext);
+            }
         }
     }
 }
