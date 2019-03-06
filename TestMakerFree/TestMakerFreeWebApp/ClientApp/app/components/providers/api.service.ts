@@ -18,6 +18,11 @@ export class TestMakerFreeApiService {
     */
    private baseUrl: string;
 
+  /**
+   * URL for calling quiz api.
+   */
+  public quizUrl: string = 'api/quiz/';
+
    /**
     * Make api call via HTTP get.
     */
@@ -27,4 +32,13 @@ export class TestMakerFreeApiService {
         tap(res => res, error => console.error(error))
       );
    }
+
+  /**
+   * Fetch quiz corresponding to provided id.
+   * 
+   * @param id 
+   */
+  public getQuiz(id: number): Observable<Quiz> {
+    return this.http.get<Quiz>(this.baseUrl + this.quizUrl + id);
+  }
 }

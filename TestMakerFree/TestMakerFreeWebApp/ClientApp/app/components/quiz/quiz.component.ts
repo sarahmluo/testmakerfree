@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
 export class QuizComponent implements OnInit{
   constructor (
     private activedRoute: ActivatedRoute,
-    private http: TestMakerFreeApiService,
+    private api: TestMakerFreeApiService,
     private router: Router
   ) { }
 
@@ -20,11 +20,6 @@ export class QuizComponent implements OnInit{
    * Quiz object.
    */
   public quiz: Quiz;
-
-  /**
-   * URL for calling quiz api.
-   */
-  public quizUrl: string = 'api/quiz/';
 
   /** 
    * On Init.
@@ -35,21 +30,11 @@ export class QuizComponent implements OnInit{
     let id: number = +this.activedRoute.snapshot.params["id"];
     console.log(id);
     if (id) {
-      this.getQuiz(id).subscribe(res => this.quiz = res,
-        error => console.log(error));
+      this.api.getQuiz(id).subscribe(res => this.quiz = res);
     } else {
       // redirect back to home
       console.log("Invalid id: routing back to home...");
       this.router.navigate(['home']);
     }
-  }
-
-  /**
-   * Fetch quiz corresponding to provided id.
-   * 
-   * @param id 
-   */
-  private getQuiz(id: number): Observable<Quiz> {
-    return this.http.get<Quiz>(this.quizUrl + id);
   }
 }
