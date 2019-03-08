@@ -165,8 +165,12 @@ namespace TestMakerFreeWebApp.Controllers
             // persist changes to db
             DbContext.SaveChanges();
 
-            // return http status ok
-            return new OkResult();
+            // return deleted quiz bc front end expects a JSON object
+            return new JsonResult(quiz.Adapt<QuizViewModel>(),
+            new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented
+            });
         }
 
         #endregion

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 
 @Injectable()
@@ -29,7 +29,7 @@ export class TestMakerFreeApiService {
    public get<T>(url: string): Observable<T> {
     return this.http.get<T>(`${this.baseUrl}${url}`)
       .pipe(
-        tap(res => res, error => console.error(error))
+        catchError(error => Observable.throw(error))
       );
    }
 
@@ -39,6 +39,45 @@ export class TestMakerFreeApiService {
    * @param id 
    */
   public getQuiz(id: number): Observable<Quiz> {
-    return this.http.get<Quiz>(this.baseUrl + this.quizUrl + id);
+    return this.http.get<Quiz>(this.baseUrl + this.quizUrl + id)
+      .pipe(
+        catchError(error => Observable.throw(error))
+      );
+  }
+
+  /**
+   * Update provided quiz.
+   * 
+   * @param quiz 
+   */
+  public putQuiz(quiz: Quiz): Observable<Quiz> {
+    return this.http.put<Quiz>(this.baseUrl + this.quizUrl, quiz)
+      .pipe(
+        catchError(error => Observable.throw(error))
+      );
+  }
+
+  /**
+   * Create New quiz.
+   * 
+   * @param quiz 
+   */
+  public postQuiz(quiz: Quiz): Observable<Quiz> {
+    return this.http.post<Quiz>(this.baseUrl + this.quizUrl, quiz)
+      .pipe(
+        catchError(error => Observable.throw(error))
+      );
+  }
+
+  /**
+   * Delete a quiz.
+   * 
+   * @param id 
+   */
+  public deleteQuiz(id: number): Observable<any> {
+    return this.http.delete(this.baseUrl + this.quizUrl + id)
+      .pipe(
+        catchError(error => Observable.throw(error))
+      );
   }
 }

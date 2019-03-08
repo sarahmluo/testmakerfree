@@ -5,12 +5,25 @@ using System.Threading.Tasks;
 using TestMakerFreeWebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using TestMakerFreeWebApp.Data;
 
 namespace TestMakerFreeWebApp.Controllers
 {
     [Route("api/[controller]")]
     public class QuestionController : Controller
     {
+        #region Private Fields
+        private ApplicationDbContext DbContext;
+        #endregion
+
+        #region Constructor
+        public QuestionController(ApplicationDbContext context)
+        {
+            // Instantiate a DB context through DI
+            DbContext = context;
+        }
+        #endregion
+
         #region RESTful conventions methods
         /// <summary>
         /// Retrieves the question with the given {id}

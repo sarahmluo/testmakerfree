@@ -48,4 +48,32 @@ export class QuizEditComponent implements OnInit {
             this.title = "Create New Quiz";
         }
     }
+
+    /**
+     * Logic executed when form is submitted.
+     * 
+     * @param quiz 
+     */
+    public onSubmit(quiz: Quiz): void {
+        if (this.editMode) {
+            this.api.putQuiz(quiz).subscribe(res => {
+                let updatedQuiz: Quiz = res;
+                console.log("Quiz " + updatedQuiz.Id + " has been updated");
+                this.router.navigate(["home"]);
+            });
+        } else {
+            this.api.postQuiz(quiz).subscribe(res => {
+                let newQuiz: Quiz = res;
+                console.log("Quiz " + newQuiz.Id + "  has been created");
+                this.router.navigate(["home"]);
+            });
+        }
+    }
+
+    /**
+     * Navigate back to home.
+     */
+    public onBack(): void {
+        this.router.navigate(["home"]);
+    }
 }

@@ -7,9 +7,11 @@
     </li>
     <li>
       <label>Description</label>
-      <textarea [(ngModel)]="quiz.Description" placeholder="Insert the description...">
-        
-      </textarea>
+      <textarea [(ngModel)]="quiz.Description" placeholder="Insert the description..."></textarea>
     </li>
   </ul>
+  <div>
+    <input type="button" value="Edit" (click)="onEdit()" />
+    <input type="button" value="Delete this quiz" (click)="onDelete()" />
+  </div>
 </div>
