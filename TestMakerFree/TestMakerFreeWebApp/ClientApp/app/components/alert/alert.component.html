@@ -1,0 +1,4 @@
+<div *ngFor="let item of alerts" class="tm-alert" [ngClass]="item.css">
+  <span class="close" (click)="remove(item)">&times;</span>
+  <span>{{item.text}}</span>
+</div>

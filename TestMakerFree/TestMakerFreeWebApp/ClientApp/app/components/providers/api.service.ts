@@ -3,11 +3,14 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { TestMakerAlertService } from '../alert/alert.service';
+
 
 @Injectable()
 export class TestMakerFreeApiService {
   constructor(
     private http: HttpClient,
+    private alertService: TestMakerAlertService,
     @Inject('BASE_URL') baseUrl: string
   ) {
     this.baseUrl = baseUrl;
@@ -77,7 +80,19 @@ export class TestMakerFreeApiService {
   public deleteQuiz(id: number): Observable<any> {
     return this.http.delete(this.baseUrl + this.quizUrl + id)
       .pipe(
-        catchError(error => Observable.throw(error))
+        catchError(error => this.handleError(error))
       );
+  }
+
+  /**
+   * Add error to alerts.
+   * 
+   * @param err 
+   */
+  private handleError(err: any): Observable<any> {
+    let message: string = err.error.error;
+    this.alertService.error(message);
+
+    return Observable.throw(message);
   }
 }

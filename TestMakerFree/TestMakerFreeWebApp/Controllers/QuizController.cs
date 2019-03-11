@@ -166,11 +166,12 @@ namespace TestMakerFreeWebApp.Controllers
             DbContext.SaveChanges();
 
             // return deleted quiz bc front end expects a JSON object
-            return new JsonResult(quiz.Adapt<QuizViewModel>(),
-            new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented
-            });
+            //return new JsonResult(quiz.Adapt<QuizViewModel>(),
+            //new JsonSerializerSettings
+            //{
+            //    Formatting = Formatting.Indented
+            //});
+            return new OkResult();
         }
 
         #endregion

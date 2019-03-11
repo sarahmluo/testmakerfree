@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AboutComponent } from './components/about/about.component';
+import { TestMakerAlertComponent } from './components/alert/alert.component';
+import { TestMakerAlertService } from './components/alert/alert.service';
 import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -23,7 +25,8 @@ import { QuizComponent } from './components/quiz/quiz.component';
         LoginComponent,
         QuizComponent,
         QuizEditComponent,
-        QuizListComponent
+        QuizListComponent,
+        TestMakerAlertComponent
     ],
     imports: [
         CommonModule,
@@ -41,7 +44,8 @@ import { QuizComponent } from './components/quiz/quiz.component';
         ])
     ],
     providers: [
-        TestMakerFreeApiService
+        TestMakerFreeApiService,
+        TestMakerAlertService
     ]
 })
 export class AppModuleShared {
