@@ -6,6 +6,8 @@ using TestMakerFreeWebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TestMakerFreeWebApp.Data;
+using Mapster;
+using TestMakerFreeWebApp.Data.Models;
 
 namespace TestMakerFreeWebApp.Controllers
 {
@@ -33,29 +35,102 @@ namespace TestMakerFreeWebApp.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Content("Not implemented yet!");
+            var question = DbContext.Questions.Where(i => i.Id == id).FirstOrDefault();
+
+            // if the question doesn't exist...
+            if (question == null)
+            {
+                return NotFound(new
+                {
+                    Error = String.Format("Question ID {0} was not found", id)
+                });
+            }
+
+            return new JsonResult(
+                question.Adapt<QuestionViewModel>(),
+                new JsonSerializerSettings()
+                {
+                    Formatting = Formatting.Indented
+                });
         }
 
         /// <summary>
-        /// Add a new question to the database.
+        /// Edit a new question to the database.
         /// </summary>
         /// <param name="m">The view model containing the data to insert</param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult Put(QuestionViewModel m)
+        public IActionResult Put(QuestionViewModel model)
         {
-            throw new NotImplementedException();
+            // return 500 error if payload is invalid
+            if (model == null) return new StatusCodeResult(500);
+
+            // retrieve question to edit.
+            var question = DbContext.Questions.Where(q => q.Id == model.Id).FirstOrDefault();
+
+            // handle requests asking for non-existing questions
+            if (question == null)
+            {
+                return NotFound(new
+                {
+                    Error = String.Format("Question ID {0} was not found.", model.Id)
+                });
+            }
+
+            // handle the update by manually assigning properties we want 
+            // to accept from the front end
+            question.QuizId = model.QuizId;
+            question.Text = model.Text;
+            question.Notes = model.Notes;
+
+            // properties set from server side
+            question.LastModifiedDate = DateTime.Now;
+
+            // persist changes
+            DbContext.SaveChanges();
+
+            // return updated quiz to the client
+            return new JsonResult(question.Adapt<QuestionViewModel>(),
+                new JsonSerializerSettings()
+                {
+                    Formatting = Formatting.Indented
+                });
         }
 
         /// <summary>
-        /// Edit the question with the given {id}
+        /// Add the question with the given {id}
         /// </summary>
         /// <param name="m">The view model containing the data to update</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Post(QuestionViewModel m)
+        public IActionResult Post([FromBody]QuestionViewModel model)
         {
-            throw new NotImplementedException();
+            // return 500 error if payload is invalid
+            if (model == null) return new StatusCodeResult(500);
+
+            // map the ViewModel to the model
+            var question = model.Adapt<Question>();
+
+            // set values from front end
+            question.QuizId = model.QuizId;
+            question.Text = model.Text;
+            question.Notes = model.Notes;
+
+            // properties set from server-side
+            question.CreatedDate = DateTime.Now;
+            question.LastModifiedDate = question.CreatedDate;
+
+            // add the new question
+            DbContext.Questions.Add(question);
+            // persist changes into the db
+            DbContext.SaveChanges();
+
+            // return newly created question to the client
+            return new JsonResult(question.Adapt<QuestionViewModel>(),
+                new JsonSerializerSettings()
+                {
+                    Formatting = Formatting.Indented
+                });
         }
 
         /// <summary>
@@ -66,7 +141,29 @@ namespace TestMakerFreeWebApp.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            throw new NotImplementedException();
+            // retrieve the question from the database
+            var question = DbContext.Questions.Where(i => i.Id == id).FirstOrDefault();
+
+            // handle requests asking for non-existing questions
+            if (question == null)
+            {
+                return NotFound(new
+                {
+                    Error = String.Format("Question ID {0} was not found", id)
+                });
+            }
+
+            // Remove the question from the DbCOntext
+            DbContext.Questions.Remove(question);
+            // persist changes in the DB
+            DbContext.SaveChanges();
+
+            // return deleted question since client expects a JSON Result
+            return new JsonResult(question.Adapt<QuestionViewModel>(),
+                new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented
+                });
         }
 
         #endregion
@@ -75,34 +172,11 @@ namespace TestMakerFreeWebApp.Controllers
         [HttpGet("All/{quizId}")]
        public IActionResult All(int quizId)
         {
-            var sampleQuestions = new List<QuestionViewModel>();
-
-            // add a first sample question
-            sampleQuestions.Add(new QuestionViewModel()
-            {
-                Id = 1,
-                QuizId = quizId,
-                Text = "What do you value most in your life?",
-                CreatedDate = DateTime.Now,
-                LastModifiedDate = DateTime.Now
-            });
-
-            // add a bunch of other sample questions
-            for (int i = 2; i <= 5; i++)
-            {
-                sampleQuestions.Add(new QuestionViewModel()
-                {
-                    Id = i,
-                    QuizId = quizId,
-                    Text = String.Format("Sample Question {0}", i),
-                    CreatedDate = DateTime.Now,
-                    LastModifiedDate = DateTime.Now
-                });
-            }
+            var questions = DbContext.Questions.Where(q => q.QuizId == quizId).ToArray();
 
             // output the result in JSON format
             return new JsonResult(
-                sampleQuestions,
+                questions.Adapt<QuestionViewModel>(),
                 new JsonSerializerSettings()
                 {
                     Formatting = Formatting.Indented
