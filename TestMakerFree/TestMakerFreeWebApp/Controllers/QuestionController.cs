@@ -11,19 +11,11 @@ using TestMakerFreeWebApp.Data.Models;
 
 namespace TestMakerFreeWebApp.Controllers
 {
-    [Route("api/[controller]")]
-    public class QuestionController : Controller
+    public class QuestionController : BaseApiController
     {
-        #region Private Fields
-        private ApplicationDbContext DbContext;
-        #endregion
-
         #region Constructor
         public QuestionController(ApplicationDbContext context)
-        {
-            // Instantiate a DB context through DI
-            DbContext = context;
-        }
+         : base(context) { }
         #endregion
 
         #region RESTful conventions methods
@@ -48,10 +40,7 @@ namespace TestMakerFreeWebApp.Controllers
 
             return new JsonResult(
                 question.Adapt<QuestionViewModel>(),
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented
-                });
+                JsonSettings);
         }
 
         /// <summary>
@@ -91,10 +80,7 @@ namespace TestMakerFreeWebApp.Controllers
 
             // return updated quiz to the client
             return new JsonResult(question.Adapt<QuestionViewModel>(),
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented
-                });
+                JsonSettings);
         }
 
         /// <summary>
@@ -127,10 +113,7 @@ namespace TestMakerFreeWebApp.Controllers
 
             // return newly created question to the client
             return new JsonResult(question.Adapt<QuestionViewModel>(),
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented
-                });
+                JsonSettings);
         }
 
         /// <summary>
@@ -160,10 +143,7 @@ namespace TestMakerFreeWebApp.Controllers
 
             // return deleted question since client expects a JSON Result
             return new JsonResult(question.Adapt<QuestionViewModel>(),
-                new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented
-                });
+                JsonSettings);
         }
 
         #endregion
@@ -177,10 +157,7 @@ namespace TestMakerFreeWebApp.Controllers
             // output the result in JSON format
             return new JsonResult(
                 questions.Adapt<QuestionViewModel>(),
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented
-                });
+                JsonSettings);
         }
     }
 }

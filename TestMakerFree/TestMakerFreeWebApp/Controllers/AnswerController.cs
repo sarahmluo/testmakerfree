@@ -13,19 +13,11 @@ using TestMakerFreeWebApp.Data.Models;
 
 namespace TestMakerFreeWebApp.Controllers
 {
-    [Route("api/[controller]")]
-    public class AnswerController : Controller
+    public class AnswerController : BaseApiController
     {
-        #region Private Fields
-        private ApplicationDbContext DbContext;
-        #endregion
-
         #region Constructor
         public AnswerController(ApplicationDbContext context)
-        {
-            // Instantiate a DB context through DI
-            DbContext = context;
-        }
+         : base(context) { }
         #endregion
 
         #region RESTful conventions methods
@@ -50,10 +42,7 @@ namespace TestMakerFreeWebApp.Controllers
 
             return new JsonResult(
                 answer.Adapt<AnswerViewModel>(),
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented
-                });
+                JsonSettings);
         }
 
         /// <summary>
@@ -95,10 +84,7 @@ namespace TestMakerFreeWebApp.Controllers
             DbContext.SaveChanges();
 
             return new JsonResult(answer.Adapt<AnswerViewModel>(),
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented
-                });
+                JsonSettings);
         }
 
         /// <summary>
@@ -134,10 +120,7 @@ namespace TestMakerFreeWebApp.Controllers
 
             // return newly created answer to the client
             return new JsonResult(answer.Adapt<AnswerViewModel>(),
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented
-                });
+                JsonSettings);
         }
 
         /// <summary>
@@ -167,10 +150,7 @@ namespace TestMakerFreeWebApp.Controllers
 
             // because front end expects json object in return
             return new JsonResult(answer.Adapt<AnswerViewModel>(),
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented
-                });
+                JsonSettings);
         }
 
         #endregion
@@ -186,10 +166,7 @@ namespace TestMakerFreeWebApp.Controllers
             // output result in JSON format
             return new JsonResult(
                 answers.Adapt<AnswerViewModel[]>(),
-                new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented
-                });
+                JsonSettings);
         }
     }
 }
