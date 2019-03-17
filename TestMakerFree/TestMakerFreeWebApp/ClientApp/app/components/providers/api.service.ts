@@ -32,7 +32,7 @@ export class TestMakerFreeApiService {
    public get<T>(url: string): Observable<T> {
     return this.http.get<T>(`${this.baseUrl}${url}`)
       .pipe(
-        catchError(error => Observable.throw(error))
+        catchError(error => this.handleError(error))
       );
    }
 
@@ -79,6 +79,18 @@ export class TestMakerFreeApiService {
    */
   public deleteQuiz(id: number): Observable<any> {
     return this.http.delete(this.baseUrl + this.quizUrl + id)
+      .pipe(
+        catchError(error => this.handleError(error))
+      );
+  }
+
+  /**
+   * Delete generic entity.
+   * @param url
+   * @param id 
+   */
+  public delete(url: string, id: number): Observable<any> {
+    return this.http.delete(this.baseUrl + url + id)
       .pipe(
         catchError(error => this.handleError(error))
       );

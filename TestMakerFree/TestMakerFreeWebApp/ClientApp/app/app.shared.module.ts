@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { TestMakerFreeApiService } from './components/providers/api.service';
+import { QuestionListComponent } from './components/question/question-list.component';
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 import { QuizEditComponent } from './components/quiz/quiz-edit/quiz-edit.component';
 import { QuizComponent } from './components/quiz/quiz.component';
@@ -26,6 +27,7 @@ import { QuizComponent } from './components/quiz/quiz.component';
         QuizComponent,
         QuizEditComponent,
         QuizListComponent,
+        QuestionListComponent,
         TestMakerAlertComponent
     ],
     imports: [

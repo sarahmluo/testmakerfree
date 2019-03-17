@@ -20,4 +20,5 @@
         <input type="button" *ngIf="!editMode" value="Create the quiz!" (click)="onSubmit(quiz)" />
         <input type="button" value="Cancel" (click)="onBack()" />
     </div>
+    <question-list [quiz]="quiz" *ngIf="editMode"></question-list>
 </div>
