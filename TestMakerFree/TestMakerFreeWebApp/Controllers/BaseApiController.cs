@@ -23,7 +23,7 @@ namespace TestMakerFreeWebApp.Controllers
                 Formatting = Formatting.Indented
             };
         }
-        #region
+        #endregion
 
         #region Shared properties
         protected ApplicationDbContext DbContext { get; private set; }

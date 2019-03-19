@@ -36,6 +36,28 @@ export class TestMakerFreeApiService {
       );
    }
 
+   /**
+    * Make api call via HTTP post.
+    * @param url 
+    */
+   public post<T>(url: string, data: T): Observable<T> {
+     return this.http.post<T>(`${this.baseUrl}${url}`, data)
+     .pipe(
+       catchError(error => this.handleError(error))
+     );
+   }
+
+   /**
+    * Make api call via HTTP post.
+    * @param url 
+    */
+   public put<T>(url: string, data: T): Observable<T> {
+    return this.http.put<T>(`${this.baseUrl}${url}`, data)
+    .pipe(
+      catchError(error => this.handleError(error))
+    );
+  }
+
   /**
    * Fetch quiz corresponding to provided id.
    * 
