@@ -2,7 +2,6 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { TestMakerFreeApiService } from '../providers/api.service';
-import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'question-list',
@@ -24,7 +23,7 @@ export class QuestionListComponent implements OnChanges {
   /**
    * List of questions for the provided quiz.
    */
-  public questions: Question[] = [];
+  public questions: Question[];
 
   /**
    * Quiz title.
@@ -36,11 +35,10 @@ export class QuestionListComponent implements OnChanges {
    * @param changes 
    */
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.quiz && changes.quiz.currentValue) {
+    if (changes.quiz) {
       // only perform the task if the value has been changed.
       if (!changes.quiz.isFirstChange()) {
         this.loadData();
-      ;
       }
     }
   }
@@ -65,7 +63,7 @@ export class QuestionListComponent implements OnChanges {
    */
   public onDelete(question: Question): void {
     if (confirm('Do you really want to delete this question?')) {
-      this.api.delete('api/question', question.Id)
+      this.api.delete('api/question/', question.Id)
         .subscribe(res => { 
           console.log(res);
           this.loadData();

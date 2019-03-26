@@ -48,7 +48,7 @@ export class QuestionEditComponent implements OnInit {
 
     if (this.editMode) {
       // fetch the question from the server
-      this.api.get<Question>('api/question' + id)
+      this.api.get<Question>('api/question/' + id)
         .subscribe(res => {
           this.question = res;
           this.title = 'Edit - ' + this.question.Text;

@@ -1,5 +1,5 @@
 <h3>Questions</h3>
-<div *ngIf="questions.length">
+<div *ngIf="questions && questions.length">
   <table class="questions">
     <thead>
       <tr>
@@ -20,7 +20,7 @@
     </tbody>
   </table>
 </div>
-<div *ngIf="!questions.length">
-  This quiz has no questions yet. Click the <strong>Add</strong> to add the first one!
+<div *ngIf="questions && !questions.length">
+  This quiz has no questions yet. Click <strong>Add</strong> to add the first one!
 </div>
 <input type="button" value="Add" (click)="onCreate()" />
