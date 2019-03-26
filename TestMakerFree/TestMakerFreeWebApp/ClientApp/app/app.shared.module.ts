@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AboutComponent } from './components/about/about.component';
 import { TestMakerAlertComponent } from './components/alert/alert.component';
 import { TestMakerAlertService } from './components/alert/alert.service';
+import { AnswerEditComponent } from './components/answer/answer-edit/answer-edit.component';
 import { AnswerListComponent } from './components/answer/answer-list.component';
 import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -32,6 +33,7 @@ import { QuizComponent } from './components/quiz/quiz.component';
         QuestionListComponent,
         QuestionEditComponent,
         AnswerListComponent,
+        AnswerEditComponent,
         TestMakerAlertComponent
     ],
     imports: [
@@ -46,6 +48,8 @@ import { QuizComponent } from './components/quiz/quiz.component';
             { path: 'quiz/:id', component: QuizComponent},
             { path: 'question/create/:id', component: QuestionEditComponent},
             { path: 'question/edit/:id', component: QuestionEditComponent},
+            { path: 'answer/create/:id', component: AnswerEditComponent },
+            { path: 'answer/edit/:id', component: AnswerEditComponent },
             { path: 'about', component: AboutComponent },
             { path: 'login', component: LoginComponent },
             { path: '**', redirectTo: 'home' }

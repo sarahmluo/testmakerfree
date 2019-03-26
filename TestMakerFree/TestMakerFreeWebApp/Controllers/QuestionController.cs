@@ -156,7 +156,7 @@ namespace TestMakerFreeWebApp.Controllers
 
             // output the result in JSON format
             return new JsonResult(
-                questions.Adapt<QuestionViewModel>(),
+                questions.Adapt<QuestionViewModel[]>(),
                 JsonSettings);
         }
     }
