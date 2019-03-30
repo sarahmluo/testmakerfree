@@ -1,0 +1,32 @@
+<h3>Results</h3>
+<div *ngIf="results && results.length">
+  <table class="results">
+    <thead>
+      <tr>
+        <th>Text</th>
+        <th>Min. Value</th>
+        <th>Max. Value</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of results">
+        <td>{{result.Text}}</td>
+        <td *ngIf="!result.MinValue">N/A</td>
+        <td *ngIf="result.MinValue">{{result.MinValue}}</td>
+        <td *ngIf="!result.MaxValue">N/A</td>
+        <td *ngIf="result.MaxValue">{{result.MaxValue}}</td>
+        <td>
+          <input type="button" value="Edit" (click)="onEdit(result)" />
+        </td>
+        <td>
+          <input type="button" value="Delete" (click)="onDelete(result)" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="results && !results.length">
+  This quiz has no results yet. Click <strong>Add</strong> to add the first one!
+</div>
+<input type="button" value="Add" (click)="onCreate()" />

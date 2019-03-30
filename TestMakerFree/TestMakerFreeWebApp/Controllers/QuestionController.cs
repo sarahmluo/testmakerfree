@@ -49,7 +49,7 @@ namespace TestMakerFreeWebApp.Controllers
         /// <param name="m">The view model containing the data to insert</param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult Put(QuestionViewModel model)
+        public IActionResult Put([FromBody] QuestionViewModel model)
         {
             // return 500 error if payload is invalid
             if (model == null) return new StatusCodeResult(500);

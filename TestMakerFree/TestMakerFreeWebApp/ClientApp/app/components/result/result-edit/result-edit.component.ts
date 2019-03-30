@@ -4,11 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TestMakerFreeApiService } from '../../providers/api.service';
 
 @Component({
-  selector: 'question-edit',
-  templateUrl: 'question-edit.component.html',
-  styleUrls: ['./question-edit.component.css']
+  selector: 'result-edit',
+  templateUrl: 'result-edit.component.html',
+  styleUrls: ['./result-edit.component.css']
 })
-export class QuestionEditComponent implements OnInit {
+export class ResultEditComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -21,9 +21,9 @@ export class QuestionEditComponent implements OnInit {
   public title: string;
 
   /**
-   * Question to edit.
+   * Result to edit.
    */
-  public question: Question;
+  public result: Result;
 
   /**
    * Flag to determine edit mode.
@@ -33,13 +33,13 @@ export class QuestionEditComponent implements OnInit {
   /**
    * API url.
    */
-  private url: string = "api/question";
+  private url: string = "api/result/";
 
   /**
    * On Init.
    */
   public ngOnInit(): void {
-    this.question = <Question>{};
+    this.result = <Result>{};
 
     const id: number = +this.activatedRoute.snapshot.params['id'];
 
@@ -48,34 +48,34 @@ export class QuestionEditComponent implements OnInit {
 
     if (this.editMode) {
       // fetch the question from the server
-      this.api.get<Question>('api/question/' + id)
+      this.api.get<Result>(this.url + id)
         .subscribe(res => {
-          this.question = res;
-          this.title = 'Edit - ' + this.question.Text;
+          this.result = res;
+          this.title = 'Edit - ' + this.result.Text;
         })
     } else {
-      this.question.QuizId = id;
-      this.title = 'Create a New Question';
+      this.result.QuizId = id;
+      this.title = 'Create a New Result';
     }
   }
 
   /**
    * Logic to execute when form is submitted.
    */
-  public onSubmit(question: Question): void {
+  public onSubmit(result: Result): void {
     if (this.editMode) {
-      this.api.put<Question>(this.url, question)
+      this.api.put<Result>(this.url, result)
         .subscribe(res => {
-          const retQuestion: Question = res;
-          console.log('Question ' + retQuestion.Id + ' has been updated');
-          this.router.navigate(['quiz/edit', retQuestion.QuizId]);
+          const retResult: Result = res;
+          console.log('Result ' + retResult.Id + ' has been updated');
+          this.router.navigate(['quiz/edit', retResult.QuizId]);
       })
     } else {
-      this.api.post<Question>(this.url, question)
+      this.api.post<Result>(this.url, result)
         .subscribe(res => {
-          const newQuestion: Question = res;
-          console.log('Question ' + newQuestion.Id + ' has been created');
-          this.router.navigate(['quiz/edit', newQuestion.QuizId]);
+          const newResult: Result = res;
+          console.log('Result ' + newResult.Id + ' has been created');
+          this.router.navigate(['quiz.edit', newResult.QuizId]);
         })
     }
   }
@@ -84,7 +84,7 @@ export class QuestionEditComponent implements OnInit {
    * Navigate Back.
    */
   public onBack(): void {
-    this.router.navigate(['quiz/edit', this.question.QuizId]);
+    this.router.navigate(['quiz/edit', this.result.QuizId]);
   }
 
 }

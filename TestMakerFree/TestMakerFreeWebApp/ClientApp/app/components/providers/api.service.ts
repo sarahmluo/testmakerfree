@@ -124,7 +124,7 @@ export class TestMakerFreeApiService {
    * @param err 
    */
   private handleError(err: any): Observable<any> {
-    let message: string = err.error.error;
+    let message: string = err.message || err.error.error;
     this.alertService.error(message);
 
     return Observable.throw(message);

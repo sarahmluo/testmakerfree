@@ -19,6 +19,8 @@ import { QuestionListComponent } from './components/question/question-list.compo
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 import { QuizEditComponent } from './components/quiz/quiz-edit/quiz-edit.component';
 import { QuizComponent } from './components/quiz/quiz.component';
+import { ResultListComponent } from './components/result/result-list.component';
+import { ResultEditComponent } from './components/result/result-edit/result-edit.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +36,8 @@ import { QuizComponent } from './components/quiz/quiz.component';
         QuestionEditComponent,
         AnswerListComponent,
         AnswerEditComponent,
+        ResultEditComponent,
+        ResultListComponent,
         TestMakerAlertComponent
     ],
     imports: [
@@ -50,6 +54,8 @@ import { QuizComponent } from './components/quiz/quiz.component';
             { path: 'question/edit/:id', component: QuestionEditComponent},
             { path: 'answer/create/:id', component: AnswerEditComponent },
             { path: 'answer/edit/:id', component: AnswerEditComponent },
+            { path: 'result/create/:id', component: ResultEditComponent },
+            { path: 'result/edit/:id', component: ResultEditComponent },
             { path: 'about', component: AboutComponent },
             { path: 'login', component: LoginComponent },
             { path: '**', redirectTo: 'home' }
