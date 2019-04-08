@@ -12,8 +12,8 @@
     <tbody>
       <tr *ngFor="let result of results">
         <td>{{result.Text}}</td>
-        <td *ngIf="!result.MinValue">N/A</td>
-        <td *ngIf="result.MinValue">{{result.MinValue}}</td>
+        <td *ngIf="result.MinValue === null">N/A</td>
+        <td *ngIf="result.MinValue !== null">{{result.MinValue}}</td>
         <td *ngIf="!result.MaxValue">N/A</td>
         <td *ngIf="result.MaxValue">{{result.MaxValue}}</td>
         <td>

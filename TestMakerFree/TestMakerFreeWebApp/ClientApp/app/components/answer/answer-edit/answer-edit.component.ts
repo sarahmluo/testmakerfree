@@ -68,14 +68,14 @@ export class AnswerEditComponent implements OnInit {
         .subscribe(res => {
           const retAnswer: Answer = res;
           console.log('Answer ' + retAnswer.Id + ' has been updated');
-          this.router.navigate(['quiz/edit', retAnswer.QuestionId]);
+          this.router.navigate(['question/edit', retAnswer.QuestionId]);
       })
     } else {
       this.api.post<Answer>(this.url, answer)
         .subscribe(res => {
           const newAnswer: Answer = res;
           console.log('Answer ' + newAnswer.Id + ' has been created');
-          this.router.navigate(['quiz.edit', newAnswer.QuestionId]);
+          this.router.navigate(['question/edit', newAnswer.QuestionId]);
         })
     }
   }

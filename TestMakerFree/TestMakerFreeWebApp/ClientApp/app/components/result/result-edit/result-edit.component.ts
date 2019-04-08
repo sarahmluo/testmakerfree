@@ -75,7 +75,7 @@ export class ResultEditComponent implements OnInit {
         .subscribe(res => {
           const newResult: Result = res;
           console.log('Result ' + newResult.Id + ' has been created');
-          this.router.navigate(['quiz.edit', newResult.QuizId]);
+          this.router.navigate(['quiz/edit', newResult.QuizId]);
         })
     }
   }

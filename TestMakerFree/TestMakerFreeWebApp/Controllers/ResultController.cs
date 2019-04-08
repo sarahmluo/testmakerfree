@@ -49,14 +49,14 @@ namespace TestMakerFreeWebApp.Controllers
         /// <param name="m">The view model containing the data to insert</param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult Put(ResultViewModel model)
+        public IActionResult Put([FromBody] ResultViewModel model)
         {
             if (model == null) return new StatusCodeResult(500);
 
             // retrieve the result to edit
             var result = DbContext.Results.Where(r => r.Id == model.Id).FirstOrDefault();
 
-            if(result == null)
+            if (result == null)
             {
                 return NotFound(new
                 {
@@ -86,7 +86,7 @@ namespace TestMakerFreeWebApp.Controllers
         /// <param name="m">The view model containing the data to update</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Post(ResultViewModel model)
+        public IActionResult Post([FromBody] ResultViewModel model)
         {
             if (model == null) return new StatusCodeResult(500);
 

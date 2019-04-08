@@ -138,6 +138,14 @@ namespace TestMakerFreeWebApp.Controllers
 
             // Remove the question from the DbCOntext
             DbContext.Questions.Remove(question);
+
+            // Delete all answers associated with this question
+            var answers = DbContext.Answers.Where(a => a.QuestionId == id).ToArray();
+            foreach (var answer in answers)
+            {
+                DbContext.Answers.Remove(answer);
+            }
+
             // persist changes in the DB
             DbContext.SaveChanges();
 
