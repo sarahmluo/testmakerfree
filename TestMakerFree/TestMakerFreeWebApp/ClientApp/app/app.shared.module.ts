@@ -18,9 +18,10 @@ import { QuestionEditComponent } from './components/question/question-edit/quest
 import { QuestionListComponent } from './components/question/question-list.component';
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 import { QuizEditComponent } from './components/quiz/quiz-edit/quiz-edit.component';
+import { QuizSearchComponent } from './components/quiz/quiz-search/quiz-search.component';
 import { QuizComponent } from './components/quiz/quiz.component';
-import { ResultListComponent } from './components/result/result-list.component';
 import { ResultEditComponent } from './components/result/result-edit/result-edit.component';
+import { ResultListComponent } from './components/result/result-list.component';
 
 @NgModule({
     declarations: [
@@ -32,6 +33,7 @@ import { ResultEditComponent } from './components/result/result-edit/result-edit
         QuizComponent,
         QuizEditComponent,
         QuizListComponent,
+        QuizSearchComponent,
         QuestionListComponent,
         QuestionEditComponent,
         AnswerListComponent,
