@@ -1,24 +1,45 @@
-<h2>{{title}}</h2>
 <div class="quiz-edit">
-    <div>
+    <h2>{{quiz.Title}}</h2>
+    <div class="form-group">
         <label for="title">Quiz Title:</label>
         <br />
-        <input type="text" id="title" [(ngModel)]="quiz.Title" placeholder="Choose a title..."/>
+        <input type="text" id="title" 
+            [(ngModel)]="quiz.Title"
+            placeholder="Choose a title..."
+            class="form-control"/>
     </div>
-    <div>
+    <div class="form-group">
         <label for="description">Quiz Description:</label>
         <br />
-        <input type="text" id="description" [(ngModel)]="quiz.Description" placeholder="Enter a description..." />
+        <input type="text" id="description" 
+            [(ngModel)]="quiz.Description"
+            placeholder="Enter a Description..."
+            class="form-control"/>
     </div>
-    <div>
-        <label for="text">Quiz Informative Text</label>
+    <div class="form-group">
+        <label for="text">Quiz Informative Text:</label>
         <br />
-        <textarea id="text" [(ngModel)]="quiz.Text" placeholder="Enter some informative text..."></textarea>
+        <input type="text" id="text" 
+            [(ngModel)]="quiz.Text"
+            placeholder="Enter some informative text..."
+            class="form-control"/>
     </div>
-    <div>
-        <input type="button" *ngIf="editMode" value="Apply Changes" (click)="onSubmit(quiz)" />
-        <input type="button" *ngIf="!editMode" value="Create the quiz!" (click)="onSubmit(quiz)" />
-        <input type="button" value="Cancel" (click)="onBack()" />
+    <div class="form-group commands">
+        <input *ngIf="editMode" type="button"
+                value="Apply Changes"
+                (click)="onSubmit(quiz)"
+                class="btn btn-success" 
+        />
+        <input *ngIf="!editMode" type="button"
+                value="Create the Quiz!"
+                (click)="onSubmit(quiz)"
+                class="btn btn-success" 
+        />
+        <input  type="button"
+                value="Cancel"
+                (click)="onBack()"
+                class="btn btn-default" 
+        />
     </div>
     <question-list [quiz]="quiz" *ngIf="editMode"></question-list>
     <result-list [quiz]="quiz" *ngIf="editMode"></result-list>
